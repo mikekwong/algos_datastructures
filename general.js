@@ -126,3 +126,60 @@ function titleCase (str) {
 
 console.log(titleCase("i'm a liTtle teA pot"))
 console.log(titleCase('together a liTtle teA pot'))
+
+// copy each element of first array into second array in order
+function frankenSplice (arr1, arr2, n) {
+  let localArr = arr2.slice()
+  for (let i = 0; i < arr1.length; i++) {
+    localArr.splice(n, 0, arr1[i])
+    n++
+  }
+  return localArr
+}
+
+console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1))
+
+// falsy bouncer
+// return values that aren't falsey
+function bouncer (arr) {
+  return arr.filter(item => !!item)
+}
+
+console.log(bouncer([7, 'ate', '', false, 9]))
+
+function getIndexToIns (arr, num) {
+  arr.push(num)
+  return arr.sort((a, b) => a - b).indexOf(num)
+}
+
+console.log(getIndexToIns([40, 60], 50))
+
+// // Mutations
+// function mutation (arr) {
+//   var test = arr[1].toLowerCase()
+//   var target = arr[0].toLowerCase()
+//   for (var i = 0; i < test.length; i++) {
+//     if (target.indexOf(test[i]) < 0) return false
+//   }
+//   return true
+// }
+//
+// declarative
+function mutation (arr) {
+  return arr[1]
+    .toLowerCase()
+    .split('')
+    .every(letter => arr[0].toLowerCase().indexOf(letter) !== -1)
+}
+
+console.log(mutation(['hello', 'hello']))
+
+function chunkArrayInGroups (arr, size) {
+  let newArr = []
+  for (let i = 0; i < arr.length; i += size) {
+    newArr.push(arr.slice(i, i + size))
+  }
+  return newArr
+}
+
+console.log(chunkArrayInGroups(['a', 'b', 'c', 'd'], 2))
