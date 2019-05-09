@@ -122,6 +122,8 @@ function arrayOfHiNTimes (n) {
 
 // Usually when we talk about space complexity, we're talking about additional space, so we don't include space taken up by the inputs. For example, this function takes constant space even though the input has n items:
 
+// O(1)
+
 function getLargestItem (items) {
   let largest = Number.MAX_VALUE
   items.forEach(item => {
