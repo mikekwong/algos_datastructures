@@ -133,3 +133,23 @@ function getLargestItem (items) {
   })
   return largest
 }
+
+// algo test for linked list lookup
+
+function getIthItemInLInkedList (head, i) {
+  if (i < 0) {
+    throw new Error(" I can't be negative: " + i)
+  }
+  let currentPosition = 0
+  let currentNode = head
+  while (currentNode) {
+    if (currentPosition === i) {
+      // found it
+      return currentNode
+    }
+    // Move on to next node
+    currentNode = currentNode.next
+    currentPosition++
+  }
+  throw new Error('List has fewer than i + 1 (' + (i + 1) + ') nodes')
+}
