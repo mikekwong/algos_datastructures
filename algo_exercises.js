@@ -101,3 +101,172 @@ function rotateArray (arr, rotateNum) {
 }
 
 console.log(rotateArray([1, 2, 3, 4, 5], 1))
+console.log(rotateArray([1, 2, 3, 4, 5], -1))
+console.log(rotateArray([1, 2, 3, 4, 5], 0))
+
+let transactions = [
+  {
+    name: 'Tons of glitter',
+    amount: 70
+  },
+  {
+    name: 'Porcelain Pink Flamingos',
+    amount: 92
+  },
+  {
+    name: 'Chandelier replacement',
+    amount: 10000
+  },
+  {
+    name: 'Dinner at TGIF x6',
+    amount: 250
+  }
+]
+
+function lastFridayNight (arr) {
+  return arr.reduce((prev, accu) => {
+    return prev + accu.amount
+  }, 0)
+}
+
+console.log(lastFridayNight(transactions))
+
+function compareObjects (obj1, obj2) {
+  for (let key in obj1) {
+    if (obj1[key] !== obj2[key]) {
+      return false
+    }
+  }
+  for (let key in obj2) {
+    if (obj1[key] !== obj2[key]) {
+      return false
+    }
+  }
+  return true
+}
+
+console.log(compareObjects({ name: 'zeke' }, { name: 'zeke', age: 12 }))
+
+let letters = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z'
+]
+let leetChars = [
+  '@',
+  '8',
+  '(',
+  '|)',
+  '3',
+  'ph',
+  'g',
+  '#',
+  'l',
+  '_|',
+  '|<',
+  '1',
+  "|'|'|",
+  '//',
+  '0',
+  '|D',
+  '(,)',
+  '|2',
+  '5',
+  '+',
+  '|_|',
+  '|/',
+  "|/|/'",
+  '><',
+  'j',
+  '2'
+]
+
+function leetTranslator (word) {
+  let str = ''
+  for (let i = 0; i < word.length; i++) {
+    let indexedLetter = letters.indexOf(word[i].toLowerCase())
+    str += leetChars[indexedLetter]
+  }
+  return str
+}
+
+console.log(leetTranslator('fullstack'))
+
+let animalNoises = [
+  {
+    dog: {
+      America: 'Woof! Woof!',
+      Germany: 'Wau Wau!',
+      England: 'Bow wow!',
+      Uruguay: 'Jua jua!',
+      Afrikaans: 'Blaf!',
+      Korea: 'Mong mong!',
+      Iceland: 'Voff voff!',
+      Albania: 'Ham!',
+      Algeria: 'Ouaf ouaf!'
+    }
+  },
+  {
+    cat: {
+      America: 'Meow',
+      Germany: 'Miauw!',
+      England: 'mew mew',
+      Uruguay: 'Miau Miau!',
+      Afrikaans: 'Purr',
+      Korea: 'Nyaong!',
+      Iceland: 'Kurnau!',
+      Albania: 'Miau',
+      Algeria: 'Miaou!'
+    }
+  },
+  {
+    chicken: {
+      America: 'Cluck cluck',
+      Germany: 'tock tock tock',
+      England: 'Cluck Cluck',
+      Uruguay: 'gut gut gdak',
+      Afrikaans: 'kukeleku',
+      Korea: 'ko-ko-ko',
+      Iceland: 'Chuck-chuck!',
+      Albania: 'Kotkot',
+      Algeria: 'Cotcotcodet'
+    }
+  }
+]
+
+function petSounds (animal, country) {
+  let str = ''
+  for (let i = 0; i < animalNoises.length; i++) {
+    if (animal in animalNoises[i]) {
+      str += `${animal[0].toUpperCase() + animal.slice(1)}s in ${country} say ${
+        animalNoises[i][animal][country]
+      }`
+    }
+  }
+  return str
+}
+
+console.log(petSounds('dog', 'Iceland'))
