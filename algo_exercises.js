@@ -270,3 +270,97 @@ function petSounds (animal, country) {
 }
 
 console.log(petSounds('dog', 'Iceland'))
+
+function frequencyAnalysis (str) {
+  let obj = {}
+  for (let i = 0; i < str.length; i++) {
+    if (!obj[str[i]]) {
+      obj[str[i]] = 1
+    } else {
+      obj[str[i]]++
+    }
+  }
+  return obj
+}
+
+console.log(frequencyAnalysis('abca'))
+
+function dogBreeder (name = 'Steve', age = 0) {
+  if (typeof name === 'number') {
+    age = name
+    name = 'Steve'
+  }
+  return { name: name, age: age }
+}
+
+console.log(dogBreeder('Sam', 12))
+
+let classRoom = [
+  {
+    Marnie: [
+      { Monday: true },
+      { Tuesday: true },
+      { Wednesday: true },
+      { Thursday: true },
+      { Friday: true }
+    ]
+  },
+  {
+    Lena: [
+      { Monday: false },
+      { Tuesday: false },
+      { Wednesday: true },
+      { Thursday: false },
+      { Friday: true }
+    ]
+  },
+  {
+    Shoshanna: [
+      { Monday: true },
+      { Tuesday: true },
+      { Wednesday: false },
+      { Thursday: true },
+      { Friday: false }
+    ]
+  },
+  {
+    Jessa: [
+      { Monday: false },
+      { Tuesday: false },
+      { Wednesday: false },
+      { Thursday: false },
+      { Friday: true }
+    ]
+  }
+]
+
+function classCheck (day) {
+  let presentStudents = []
+
+  // loop through the students in classRoom
+  for (let i = 0; i < classRoom.length; i++) {
+    // store each student object in a variable
+    let studentObj = classRoom[i]
+    // each object has one key, which is the name of the student
+    let studentName = Object.keys(studentObj)[0]
+    // the only value in studentObj is the array of attendance objects
+    let attendanceObjs = studentObj[studentName]
+    // loop through the array of attendance objects
+    for (let j = 0; j < attendanceObjs.length; j++) {
+      // store each attendance object in a variable
+      let attendanceObj = attendanceObjs[j]
+      // each attendance has one key, which is the name of a day of the week
+      let dayName = Object.keys(attendanceObj)[0]
+      // if the dayName is the same as the day parameter...
+      // ...and the value in the attendanceObj is true...
+      if (dayName === day && attendanceObj[dayName]) {
+        // ...the student was present on that day!
+        presentStudents.push(studentName)
+      }
+    }
+  }
+
+  return presentStudents
+}
+
+console.log(classCheck('Monday'))
