@@ -364,3 +364,183 @@ function classCheck (day) {
 }
 
 console.log(classCheck('Monday'))
+
+let addNums = {
+  addTen: function (num) {
+    return num + 10
+  },
+
+  addTwenty: function (num) {
+    return num + 20
+  },
+
+  someProperty: 'value'
+}
+
+const callThemAll = (anObj, value) => {
+  const returnedValues = []
+
+  const objectValues = Object.values(anObj)
+
+  for (let i = 0; i < objectValues.length; i++) {
+    const currentValue = objectValues[i]
+
+    if (typeof currentValue === 'function') {
+      const resultOfFunc = currentValue(value)
+      returnedValues.push(resultOfFunc)
+    }
+  }
+  return returnedValues
+}
+
+console.log(callThemAll(addNums, 100)) // => [110, 120]
+
+// const mySplice = (anArr, startIdx, deleteCount, ...args) => {
+//   // store the beginning of the array
+//   const startElements = []
+//   // store the deleted elements
+//   const deletedElements = []
+//   // take everything from before the startIdx and store it in the StartElements array
+//   for (let i = 0; i < startIdx; i++) {
+//     startElements.push(anArr.shift())
+//   }
+//   // Then delete everything by removing an element per deletecount from the new start of the array
+//   for (let i = 0; i < deleteCount; i++) {
+//     deletedElements.push(anArr.shift())
+//   }
+//   // anArr.unshift(spliceArg)
+//   // insert the added elements into the array
+//   for (let i = args.length - 1; i >= 0; i--) {
+//     const currentArg = args[i]
+//     anArr.unshift(currentArg)
+//   }
+//   // reattach the beginnig elements onto the array
+//   for (let i = startElements.length - 1; i >= 0; i--) {
+//     const currentStartElement = startElements[i]
+//     anArr.unshift(currentStartElement)
+//   }
+//   // Return the deleted elements
+//   return deletedElements
+// }
+
+// alternative
+function mySplice (array, startIdx, deleteCount, newValue) {
+  let removedElements = []
+  let keptElements = []
+
+  // Keep all the elements before the start Idx
+  for (let i = 0; i < startIdx; i++) {
+    let element = array[i]
+    keptElements.push(element)
+  }
+  // Now we'are at the startIdx; add the newValue to the keptElements array
+  if (newValue !== undefined) {
+    keptElements.push(newValue)
+  }
+  // Add the correct number of elements to remove to the removedElements array
+  for (let i = startIdx; i < startIdx + deleteCount; i++) {
+    let element = array[i]
+    removedElements.push(element)
+  }
+  // add the remaining elements to the keptElements array
+  for (let i = startIdx + deleteCount; i < array.length; i++) {
+    let element = array[i]
+    keptElements.push(element)
+  }
+  // Remove all elements from the original array
+  while (array.length) {
+    array.pop()
+  }
+  // push only those element to keep back into the array
+  for (let i = 0; i < keptElements.length; i++) {
+    let element = keptElements[i]
+    array.push(element)
+  }
+  return removedElements
+}
+
+let myArray = [1, 2, 3]
+
+mySplice(myArray, 1, 1, 'apples') // => [2]
+
+console.log(myArray) // [1,'apples', 3]
+
+function reverseArray (arr) {
+  const newArr = []
+  for (let i = arr.length - 1; i >= 0; i--) {
+    newArr.push(arr[i])
+    arr.pop()
+  }
+  for (let i = 0; i < newArr.length; i++) {
+    arr.push(newArr[i])
+  }
+  return arr
+}
+
+// alternative
+// function reverseArray(array) {
+//   let originalElements = [];
+
+//   // pop all of the elements from the original array, and store them in a new array
+//   while (array.length) {
+//     originalElements.push(array.pop());
+//   }
+
+//   // pop all of the elements out of new array, unshift them back into the original array
+//   while (originalElements.length) {
+//     array.unshift(originalElements.pop())
+//   }
+
+//   return array;
+// }
+console.log(reverseArray([1, 2, 3, 4]))
+
+// Copy a 2d array
+function deeperCopy (arr) {
+  let arrCopy = []
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      let nestedCopy = []
+      for (let j = 0; j < arr[i].length; j++) {
+        nestedCopy.push(arr[i][j])
+      }
+      arrCopy.push(arr[i], nestedCopy)
+    }
+  }
+  return arrCopy
+}
+// alternative
+// function deeperCopy (originalArray) {
+//   let copy = []
+
+//   for (let i = 0; i < originalArray.length; i++) {
+//     let element = originalArray[i]
+//     // if the current element is another array...
+//     if (Array.isArray(element)) {
+//       // ...create a new array into which we can copy the elements of the inner array
+//       let nestedCopy = []
+//       for (let j = 0; j < element.length; j++) {
+//         let innerElement = element[j]
+//         nestedCopy.push(innerElement)
+//       }
+//       // push the copy of the inner array into the copy
+//       copy.push(nestedCopy)
+//       // otherwise, just push the element into the copy
+//     } else {
+//       copy.push(element)
+//     }
+//   }
+//   return copy
+// }
+
+let myArr = [1, [2, 3]]
+
+let copy = deeperCopy(myArr)
+copy[1].push(4)
+
+console.log(myArr) // [1, [2, 3]]
+
+let copy2 = myArr.slice()
+copy2[1].push(4)
+
+console.log(myArr) // [1, [2, 3, 4]]
