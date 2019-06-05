@@ -544,3 +544,82 @@ let copy2 = myArr.slice()
 copy2[1].push(4)
 
 console.log(myArr) // [1, [2, 3, 4]]
+
+function finderFunction (arr, fn) {
+  for (let i = 0; i < arr.length; i++) {
+    if (fn(arr[i])) {
+      return i
+    }
+  }
+  return -1
+}
+
+let numbers = [1, 3, 5, 64, 7, 12]
+let odds = [9, 13, 15, 17]
+
+function isEven (num) {
+  return !(num % 2)
+}
+
+console.log(finderFunction(numbers, isEven)) // 3
+console.log(finderFunction(odds, isEven)) // -1
+
+// Recursion
+function countVowels (str) {
+  let vowels = [...'aeiou']
+  let total = 0
+  if (str.length === 0) {
+    return 0
+  }
+  if (vowels.includes(str[0])) {
+    total++
+  }
+  total += countVowels(str.slice(1))
+  return total
+}
+
+console.log(countVowels('Four score and seven years')) // => 9)
+
+function reversedArray (arr) {
+  // base case: if the array has a length of 1, the reverse of the array is the array itself
+  if (arr.length === 1) return arr
+
+  const lastElement = arr[arr.length - 1]
+  // Keep concatenating the last element with the recursion being sliced, concat makes a shallow copy
+  return [lastElement].concat(reversedArray(arr.slice(0, -1)))
+}
+console.log(reversedArray([1, 2, 3]))
+
+function sumDigits (num) {
+  // coerce the number to a string
+  let numString = String(num)
+  // base case: if string length === 1, there's only 1 digit
+  if (numString.length === 1) {
+    return num
+  }
+  // recursive case: must make the number of digits in the number closer to 1
+  let sum = 0
+  // add the numeric value of the first character in numString to the sum
+  sum += Number(numString[0])
+  // add the sum of the remaining digits in the string
+  // have coerce the string back into a number, since sumDigits accepts a number
+  sum += sumDigits(Number(numString.slice(1)))
+  return sum
+}
+
+console.log(sumDigits(1234))
+
+// Recrusive version of palindrome
+function isPalindrome (word) {
+  word = word.toLowerCase()
+  if (word.length <= 1) {
+    return true
+  }
+  while (word[0] === word[word.length - 1]) {
+    return isPalindrome(word.slice(1, -1))
+  }
+  return false
+}
+
+console.log(isPalindrome('Tacocat')) // => true
+console.log(isPalindrome('SELFLESS')) // => false
