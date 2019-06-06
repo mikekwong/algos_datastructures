@@ -623,3 +623,73 @@ function isPalindrome (word) {
 
 console.log(isPalindrome('Tacocat')) // => true
 console.log(isPalindrome('SELFLESS')) // => false
+
+function getLongestName (family) {
+  let longestName = ''
+  for (let name in family) {
+    if (name.length > longestName.length) {
+      longestName = name
+    }
+    // If the key has a value
+    if (family[name]) {
+      let descendantsLongestName = getLongestName(family[name])
+      if (descendantsLongestName > longestName) {
+        longestName = descendantsLongestName
+      }
+    }
+  }
+  return longestName
+}
+
+let family = {
+  'Beverly Marquez': {
+    'Nina Rhone': {
+      'William Rhodes': null,
+      'Paul Nell': null,
+      'Sir Paddington the Fourth, of the county Wilstonshire': null
+    }
+  }
+}
+
+console.log(getLongestName(family))
+
+const searchParty = (name, world) => {
+  // Grab the names of all the places in the current hierarchy and store them
+  const places = Object.keys(world)
+  // Iterate through those places
+  for (let i = 0; i < places.length; i++) {
+    const place = places[i]
+    // Store the value of whatever is at that location
+    const nextValue = world[place]
+    // If person is at location, then...
+    if (nextValue === name) {
+      // return what location they're at
+      return [place]
+      // If value is an array of multiple poeple
+    } else if (Array.isArray(nextValue)) {
+      // discover if the person we are looking for is the one of the people in the array
+      const isInArray = nextValue.some(person => person === name)
+      // If so, then we found the place, so lets return it.
+      if (isInArray) return [place]
+      // Otherwise, if the value of whats at this location are more sub locations then...
+    } else if (typeof nextValue === 'object') {
+      // let's recurse on the sub location and figure out if they are inside of it
+      const inNextLocation = searchParty(name, nextValue)
+      // If person we are searching fo ris inside of it, then we can add on their location to the current location to get the full address of where they are.
+      if (inNextLocation) return [place].concat(inNextLocation)
+    }
+  }
+  // If person is not found, return null
+  return null
+}
+
+let world = {
+  Fullstack: {
+    '11th floor': 'Marge',
+    '25th floor': 'Francis'
+  },
+  Subway: ['Jackie', 'Grumio']
+}
+
+console.log(searchParty('Francis', world))
+console.log(searchParty('Franco', world))
