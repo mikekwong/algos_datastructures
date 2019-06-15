@@ -694,32 +694,39 @@ let world = {
 console.log(searchParty('Francis', world))
 console.log(searchParty('Franco', world))
 
+// function diffArray (arr1, arr2) {
+//   var newObj = {}
+
+//   helper(arr1)
+//   helper(arr2)
+
+//   let diffArr = []
+
+//   // console.log(newObj)
+
+//   for (let key in newObj) {
+//     if (newObj[key] === 1) {
+//       diffArr.push(key)
+//     }
+//   }
+//   return diffArr
+
+//   function helper (arr) {
+//     for (let i = 0; i < arr.length; i++) {
+//       if (newObj[arr[i]]) {
+//         newObj[arr[i]]++
+//       } else {
+//         newObj[arr[i]] = 1
+//       }
+//     }
+//   }
+// }
+//
 function diffArray (arr1, arr2) {
-  var newObj = {}
-
-  helper(arr1)
-  helper(arr2)
-
-  let diffArr = []
-
-  // console.log(newObj)
-
-  for (let key in newObj) {
-    if (newObj[key] === 1) {
-      diffArr.push(key)
-    }
-  }
-  return diffArr
-
-  function helper (arr) {
-    for (let i = 0; i < arr.length; i++) {
-      if (newObj[arr[i]]) {
-        newObj[arr[i]]++
-      } else {
-        newObj[arr[i]] = 1
-      }
-    }
-  }
+  // return arr1.concat(arr2)
+  return [...arr1, ...arr2].filter(
+    item => !arr1.includes(item) || !arr2.includes(item)
+  )
 }
 
 console.log(diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]))
@@ -737,3 +744,49 @@ console.log(
 )
 
 console.log(diffArray([1, 'calf', 3, 'piglet'], [1, 'calf', 3, 4]))
+
+function destroyer (arr) {
+  const args = Array.from(arguments).slice(1)
+  return arr.filter(val => {
+    return !args.includes(val)
+  })
+}
+
+console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3))
+
+function whatIsInAName (collection, source) {
+  // What's in a name?
+  let srcKeys = Object.keys(source)
+  return collection.filter(obj => {
+    return srcKeys.every(key => {
+      return obj.hasOwnProperty(key) && obj[key] === source[key]
+    })
+  })
+}
+
+console.log(
+  whatIsInAName(
+    [
+      { first: 'Romeo', last: 'Montague' },
+      { first: 'Mercutio', last: null },
+      { first: 'Tybalt', last: 'Capulet' }
+    ],
+    { last: 'Capulet' }
+  )
+)
+
+function spinalCase (str) {
+  // Create a variable for the white space and underscores.
+  var regex = /\s+|_+/g
+
+  // Replace low-upper case to low+space+uppercase
+  // $1 and $2 are placeholders for lowercase letter ($1) and uppercase letter($2), then we add space in between.
+  str = str.replace(/([a-z])([A-Z])/g, '$1 $2')
+
+  // Replace space and underscore with -
+  return str.replace(regex, '-').toLowerCase()
+}
+
+console.log(spinalCase('This Is Spinal Tap'))
+console.log(spinalCase('thisIsSpinalTap'))
+
