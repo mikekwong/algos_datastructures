@@ -51,3 +51,77 @@ function checkEquals (arr1, arr2) {
 
 console.log(checkEquals([1, 2], [1, 3]))
 console.log(checkEquals([1, 2], [1, 2]))
+
+// check if the input has at least one occurence of all digits (0-9)
+function isPandigital (num) {
+  let obj = {}
+  num = num.toString()
+  for (let i = 0; i < num.length; i++) {
+    if (obj[num[i]]) {
+      obj[num[i]]++
+    } else {
+      obj[num[i]] = 1
+    }
+  }
+  return Object.keys(obj).length === 10
+}
+
+console.log(isPandigital(98140723568910))
+console.log(isPandigital(90864523148909))
+
+// check if input as same # of x and os
+function XO (str) {
+  let newObj = {}
+  str = str.toLowerCase()
+  for (let i = 0; i < str.length; i++) {
+    if (newObj[str[i]]) {
+      newObj[str[i]]++
+    } else {
+      newObj[str[i]] = 1
+    }
+  }
+  return newObj['x'] === newObj['o']
+}
+
+console.log(XO('xooxx'))
+
+function inBox (arr) {
+  for (let i = 1; i < arr.length - 1; i++) {
+    if (arr[i].includes('*')) {
+      return true
+    }
+  }
+  return false
+}
+console.log(inBox(['###', '#*#', '###']))
+console.log(inBox(['####', '#  #', '#  #', '####']))
+
+function missingNum (arr) {
+  const numCollection = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  arr = arr.sort()
+  for (let i = 0; i < numCollection.length; i++) {
+    if (arr.indexOf(numCollection[i]) === -1) {
+      return numCollection[i]
+    }
+  }
+}
+console.log(missingNum([1, 2, 3, 4, 6, 7, 8, 9, 10]))
+
+function capMe (arr) {
+  return arr.map(name => {
+    return name[0].toUpperCase() + name.slice(1).toLowerCase()
+  })
+}
+console.log(capMe(['mavis', 'senaida', 'letty']))
+
+function removeDups (arr) {
+  let newArr = []
+  for (let i = 0; i < arr.length; i++) {
+    if (!newArr.includes(arr[i])) {
+      newArr.push(arr[i])
+    }
+  }
+  return newArr
+}
+console.log(removeDups(['John', 'Taylor', 'John']))
+console.log(removeDups([1, 0, 1, 0]))
