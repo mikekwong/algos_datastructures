@@ -95,4 +95,12 @@ function uniteUnique (arr) {
 
 console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]))
 
+var addToArrayForm = function (A, K) {
+  // convert A to a number, sum to K, then conver to string again
+  let total = Number(A.join('')) + K + ''
+  // convert total to an array, map through each number to conver them into an array of nums
+  return total.split('').map(num => Number(num))
+}
+console.log(addToArrayForm([2, 1, 5], 806))
+
 

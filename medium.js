@@ -125,3 +125,33 @@ function removeDups (arr) {
 }
 console.log(removeDups(['John', 'Taylor', 'John']))
 console.log(removeDups([1, 0, 1, 0]))
+
+function isBalanced (str) {
+  str = str.split('')
+  let newObj = {}
+  for (let i = 0; i < str.length; i++) {
+    if (newObj[str[i]]) {
+      newObj[str[i]]++
+    } else {
+      newObj[str[i]] = 1
+    }
+  }
+  return Object.values(newObj).every(count => count === 1)
+}
+
+console.log(isBalanced('{[()]}'))
+console.log(isBalanced('{[([)]]}'))
+
+function flatten (arr) {
+  const newArr = []
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      newArr.push(...flatten(arr[i]))
+    } else {
+      newArr.push(arr[i])
+    }
+  }
+  return newArr
+}
+
+console.log(flatten([['a', 'b'], ['c', 'd']]))

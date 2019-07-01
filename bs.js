@@ -32,6 +32,8 @@ function binarySearch (array, target) {
 console.log(binarySearch([1, 2, 3, 4, 5], 5))
 
 // mergeSort
+// O(n log n) time
+// O(n) space
 const mergeSort = arrayToSort => {
   // Base Case: arrays with fewer than 2 elements are sorted
   if (arrayToSort.length < 2) {
@@ -71,3 +73,5 @@ const mergeSort = arrayToSort => {
   }
   return sortedArray
 }
+
+console.log(mergeSort([7, 5, 2, 8, 1, 4, 3, 6]))
