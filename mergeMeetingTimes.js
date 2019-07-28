@@ -1,6 +1,11 @@
+// Complexity O(nlogn) time and (O(n)) space
+
+// algo for to see times in day when everyone is avail
 function mergeRanges (meetings) {
   // Create a deep copy of the meetings array
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Deep_Clone
   const meetingsCopy = JSON.parse(JSON.stringify(meetings))
+
   // Sort by start time
   const sortedMeetings = meetingsCopy.sort((a, b) => {
     return a.startTime - b.startTime
@@ -12,7 +17,8 @@ function mergeRanges (meetings) {
   for (let i = 1; i < sortedMeetings.length; i++) {
     const currentMeeting = sortedMeetings[i]
     const lastMergedMeeting = mergedMeetings[mergedMeetings.length - 1]
-    // If the current meeting overlaps the last merged meeting, use the later end time of the two
+
+    // If the current meeting overlaps with the last merged meeting, use the later end time of the two
     if (currentMeeting.startTime <= lastMergedMeeting.endTime) {
       lastMergedMeeting.endTime = Math.max(
         lastMergedMeeting.endTime,
@@ -25,6 +31,9 @@ function mergeRanges (meetings) {
   }
   return mergedMeetings
 }
+console.log(
+  mergeRanges([{ startTime: 1, endTime: 3 }, { startTime: 2, endTime: 4 }])
+)
 
 console.log(
   mergeRanges([
@@ -35,5 +44,3 @@ console.log(
     { startTime: 9, endTime: 10 }
   ])
 )
-
-
