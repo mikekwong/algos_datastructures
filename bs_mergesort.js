@@ -29,7 +29,54 @@ function binarySearch (array, target) {
   return null
 }
 
-console.log(binarySearch([1, 2, 3, 4, 5], 5))
+console.log(binarySearch([1, 2, 3, 4, 5], 3))
+
+// Recursive BS O (log N)
+function recBinarySearch (a, key, low, high) {
+  // If value doesn't exist
+  if (low > high) {
+    return -1
+  }
+
+  let mid = low + Math.floor((high - low) / 2)
+  if (a[mid] === key) {
+    return mid
+  } else if (key < a[mid]) {
+    return recBinarySearch(a, key, low, mid - 1)
+  } else {
+    return recBinarySearch(a, key, mid + 1, high)
+  }
+}
+
+function bSearch (a, key) {
+  return recBinarySearch(a, key, 0, a.length - 1)
+}
+
+let array = [
+  10,
+  20,
+  47,
+  59,
+  63,
+  75,
+  88,
+  99,
+  107,
+  120,
+  133,
+  155,
+  162,
+  176,
+  188,
+  199,
+  200,
+  210,
+  222
+]
+
+console.log('Key(47) found at: ' + bSearch(array, 47))
+console.log('Key(47) found at: ' + bSearch(array, 75))
+console.log('Key(47) found at: ' + bSearch(array, 22))
 
 // mergeSort
 // O(n log n) time
