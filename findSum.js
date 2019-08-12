@@ -91,5 +91,5 @@ function findSum2 (arr, value) {
   return false
 }
 
-console.log(findSum2([1, 2, 4], 5))
+console.log(findSum2([0, 2, 4, 3], 5))
 console.log(findSum2([1, 2, 3, 4], 10))
