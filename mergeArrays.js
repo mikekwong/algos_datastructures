@@ -54,3 +54,4 @@ function mergeArrays (myArray, alicesArray) {
 }
 
 console.log(mergeArrays(myArray, alicesArray))
+
