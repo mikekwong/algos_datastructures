@@ -51,6 +51,7 @@ function maxSubarraySumRefactor (arr, num) {
   }
   return maxSum
 }
+// i = 3
 // 17 = 17 + 2 - 2 = 17
 // i =4
 // ... = 17 -6 +1  = 12
@@ -58,6 +59,8 @@ function maxSubarraySumRefactor (arr, num) {
 // ... = 12 - 9 + 8 = 11
 // i = 6
 // ... = 11 - 2 + 5 = 14
+// i = 7
+// ... = 14 - 1 + 6 = 19
 
 console.log(maxSubarraySumRefactor([2, 6, 9, 2, 1, 8, 5, 6, 3], 3))
 console.log(maxSubarraySumRefactor([1, 2, 5, 2, 8, 1, 5], 4))
