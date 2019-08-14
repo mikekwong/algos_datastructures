@@ -39,7 +39,7 @@ function maxSubarraySumRefactor (arr, num) {
   let tempSum = 0
   if (arr.length < num) return null
   for (let i = 0; i < num; i++) {
-    // maxSum changes everytime we add the sum of the numbers in window
+    // Initial value of maxSum is the sum of first index leading to index of num
     maxSum += arr[i]
   }
   tempSum = maxSum
@@ -51,6 +51,13 @@ function maxSubarraySumRefactor (arr, num) {
   }
   return maxSum
 }
+// 17 = 17 + 2 - 2 = 17
+// i =4
+// ... = 17 -6 +1  = 12
+// i = 5
+// ... = 12 - 9 + 8 = 11
+// i = 6
+// ... = 11 - 2 + 5 = 14
 
 console.log(maxSubarraySumRefactor([2, 6, 9, 2, 1, 8, 5, 6, 3], 3))
 console.log(maxSubarraySumRefactor([1, 2, 5, 2, 8, 1, 5], 4))
