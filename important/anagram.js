@@ -27,6 +27,7 @@
 //   return true
 // }
 //
+// Check to see if the letters in first word matches letters in second word
 function validAnagram (first, second) {
   if (first.length !== second.length) {
     return false
@@ -41,10 +42,11 @@ function validAnagram (first, second) {
   for (let i = 0; i < second.length; i++) {
     let letter = second[i]
     // cant find letter or letter is zero then its not an anagram
-    // if there is an extra letter that second str, it might already be 0, so true ...then returns false
+    // e.g. if it encounters an extra letter that 2nd str has that first doesnt (because at that point the value will already be 0), then it'll definitely return false
     if (!lookup[letter]) {
       return false
     } else {
+      // if there are duplicate letters in the anagram, then subtract one from the object of respective letter..until eventually all values to the key becomes 0, and then we are done as all values will be 0
       lookup[letter] -= 1
     }
   }
